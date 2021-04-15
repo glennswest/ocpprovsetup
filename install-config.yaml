@@ -1,0 +1,68 @@
+apiVersion: v1
+baseDomain: bm.lo
+metadata:
+  name: clus3b
+networking:
+  machineCIDR: 10.19.33.0/26
+  networkType: OVNKubernetes
+compute:
+- name: worker
+  replicas: 2
+controlPlane:
+  name: master
+  replicas: 3
+  platform:
+    baremetal: {}
+platform:
+  baremetal:
+    apiVIP: 10.19.33.10
+    ingressVIP: 10.19.33.20
+    provisioningBridge: provisioning
+    provisioningNetworkInterface: ens192
+    provisioningNetworkCIDR: 172.22.0.0/21
+    bootstrapOSImage: http://prov.pv.lo:8080/rhcos-46.82.202011260640-0-qemu.x86_64.qcow2.gz?sha256=99928ff40c2d8e3aa358d9bd453102e3d1b5e9694fb5d54febc56e275f35da51
+    clusterOSImage: http://prov.pv.lo:8080/rhcos-46.82.202011260640-0-openstack.x86_64.qcow2.gz?sha256=a8a28cfe5f5e5dadedb3442afcb447f85bddf2e82dcd558813a985a4d495782a
+    hosts:
+      - name: master-0
+        role: master
+        bmc:
+          address: redfish://10.19.28.58/redfish/v1/Systems/System.Embedded.1
+          disableCertificateVerification: true
+          username: root
+          password: 100Mgmt-
+        bootMACAddress: e4:43:4b:bd:91:b9
+      - name: master-1
+        role: master
+        bmc:
+          address: redfish://10.19.28.59/redfish/v1/Systems/System.Embedded.1
+          disableCertificateVerification: true
+          username: root
+          password: 100Mgmt-
+        bootMACAddress: e4:43:4b:bd:90:67
+      - name: master-2
+        role: master
+        bmc:
+          address: redfish://10.19.28.60/redfish/v1/Systems/System.Embedded.1
+          disableCertificateVerification: true
+          username: root
+          password: 100Mgmt-
+        bootMACAddress: e4:43:4b:bd:91:15
+      - name: worker-0
+        role: worker
+        bmc:
+          address: redfish://10.19.28.61/redfish/v1/Systems/System.Embedded.1
+          disableCertificateVerification: true
+          username: root
+          password: 100Mgmt-
+        bootMACAddress: e4:43:4b:bd:91:4d
+      - name: worker-1
+        role: worker
+        bmc:
+          address: redfish://10.19.28.168/redfish/v1/Systems/System.Embedded.1
+          disableCertificateVerification: true
+          username: root
+          password: 100Mgmt-
+        bootMACAddress: e4:43:4b:bd:91:3f
+pullSecret: ''
+sshKey: ''
+

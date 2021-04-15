@@ -1,0 +1,16 @@
+; File is for pdns
+; Warning - every name in this file is ABSOLUTE!
+$ORIGIN .
+bm.lo   86400   IN      SOA     ns1.gw.lo server.gw.lo 2019080601 10 30 30 30
+bm.lo   86400   IN      NS      ns1.gw.lo
+api.bm.lo       86400   IN      A       10.19.33.10
+*.apps.bm.lo    86400   IN      A       10.19.33.20
+master-0.bm.lo  86400   IN      A       10.19.33.101
+master-1.bm.lo  86400   IN      A       10.19.33.102
+master-2.bm.lo  86400   IN      A       10.19.33.103
+prov.bm.lo      86400   IN      A       10.19.33.100
+provisioner.bm.lo       86400   IN      A       10.19.33.100
+worker-0.bm.lo  86400   IN      A       10.19.33.111
+worker-1.bm.lo  86400   IN      A       10.19.33.112
+worker-2.bm.lo  86400   IN      A       10.19.33.113
+
